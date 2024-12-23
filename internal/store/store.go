@@ -18,4 +18,8 @@ var (
 
 var (
 	ErrFailedToGenerateRandomBytes = errors.New("failed to generate random bytes")
+	ErrFailedToCreateSession       = errors.New("failed to create session")
+	ErrFailedToScanSession         = errors.New("failed to scan session")
+	ErrSessionExpired              = errors.New("session expired")
+	ErrFailedToDeleteSession       = errors.New("failed to delete session")
 )
