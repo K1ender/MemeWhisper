@@ -41,7 +41,7 @@ func (s *sessionStore) GenerateSessionToken() (string, error) {
 		s.logger.Error("Failed to generate random bytes", zap.Error(err))
 		return "", ErrFailedToGenerateRandomBytes
 	}
-	return strings.ToLower(base32.HexEncoding.EncodeToString(bytes)), nil
+	return strings.ToLower(base32.StdEncoding.EncodeToString(bytes)), nil
 }
 
 func (s *sessionStore) CreateSession(token string, userID int) (models.Session, error) {
