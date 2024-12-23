@@ -16,13 +16,13 @@ type IUserStore interface {
 	ChangePassword(userID int, newPassword string) error
 }
 
-type UserStore struct {
+type userStore struct {
 	conn   *sql.DB
 	logger *zap.Logger
 }
 
 func NewUserStore(conn *sql.DB, logger *zap.Logger) IUserStore {
-	return &UserStore{
+	return &userStore{
 		conn: conn,
 		logger: logger.With(
 			zap.String("store", "user"),
@@ -30,7 +30,7 @@ func NewUserStore(conn *sql.DB, logger *zap.Logger) IUserStore {
 	}
 }
 
-func (s *UserStore) GetUserByID(id int) (models.User, error) {
+func (s *userStore) GetUserByID(id int) (models.User, error) {
 	s.logger.Debug("Getting user by id", zap.Int("id", id))
 
 	tx, err := s.conn.Begin()
@@ -64,7 +64,7 @@ func (s *UserStore) GetUserByID(id int) (models.User, error) {
 	return user, nil
 }
 
-func (s *UserStore) CreateUser(user models.User) error {
+func (s *userStore) CreateUser(user models.User) error {
 	s.logger.Debug("Creating user", zap.Any("userID", user.ID))
 	tx, err := s.conn.Begin()
 	if err != nil {
@@ -97,7 +97,7 @@ func (s *UserStore) CreateUser(user models.User) error {
 	return nil
 }
 
-func (s *UserStore) ChangeUsername(userID int, newUsername string) error {
+func (s *userStore) ChangeUsername(userID int, newUsername string) error {
 	s.logger.Debug(
 		"Changing username",
 		zap.Int("userID", userID),
@@ -127,7 +127,7 @@ func (s *UserStore) ChangeUsername(userID int, newUsername string) error {
 	return nil
 }
 
-func (s *UserStore) ChangePassword(userID int, newPassword string) error {
+func (s *userStore) ChangePassword(userID int, newPassword string) error {
 	s.logger.Debug(
 		"Changing password",
 		zap.Int("userID", userID),
