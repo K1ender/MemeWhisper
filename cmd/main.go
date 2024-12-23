@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/K1ender/MemeWhisper/internal/cache"
 	"github.com/K1ender/MemeWhisper/internal/config"
 	"github.com/K1ender/MemeWhisper/internal/database"
 	"github.com/K1ender/MemeWhisper/internal/router"
@@ -29,11 +30,16 @@ func main() {
 	defer db.Close()
 	logger.Debug("Connected to database")
 
+	logger.Debug("Connecting to memcached...")
+	mc := cache.MustInit(cfg)
+	defer mc.Close()
+	logger.Debug("Connected to memcached")
+
 	router := router.NewRouter(logger)
 	logger.Debug("Starting server...")
 
 	app := router.MustInit()
-	
+
 	logger.Debug("Server started")
 
 	logger.Error("Something went wrong",

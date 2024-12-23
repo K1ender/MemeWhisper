@@ -3,6 +3,7 @@ module github.com/K1ender/MemeWhisper
 go 1.23.4
 
 require (
+	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/jackc/pgx/v5 v5.7.2
