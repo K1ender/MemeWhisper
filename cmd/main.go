@@ -35,7 +35,7 @@ func main() {
 	defer mc.Close()
 	logger.Debug("Connected to memcached")
 
-	router := router.NewRouter(logger)
+	router := router.NewRouter(logger, db)
 
 	logger.Debug("Starting server...")
 	app := router.MustInit()
