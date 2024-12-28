@@ -6,6 +6,7 @@ var (
 	ErrFailedToStartTransaction  = errors.New("failed to start transaction")
 	ErrFailedToCommitTransaction = errors.New("failed to commit transaction")
 	ErrFailedToHashPassword      = errors.New("failed to hash password")
+	ErrUserAlreadyExists         = errors.New("user already exists")
 )
 
 var (
@@ -14,6 +15,7 @@ var (
 	ErrFailedToCreateUser     = errors.New("failed to create user")
 	ErrFailedToUpdateUsername = errors.New("failed to update username")
 	ErrFailedToUpdatePassword = errors.New("failed to update password")
+	ErrFailedToGetUserID      = errors.New("failed to get user id")
 )
 
 var (
