@@ -35,12 +35,14 @@ func main() {
 	defer mc.Close()
 	logger.Debug("Connected to memcached")
 
-	router := router.NewRouter(logger)
+	router := router.NewRouter(logger, db)
+
 	logger.Debug("Starting server...")
-
 	app := router.MustInit()
-
 	logger.Debug("Server started")
+
+	// userStore := store.NewUserStore(db, logger)
+	// sessionStore := store.NewSessionStore(db, logger)
 
 	logger.Error("Something went wrong",
 		zap.Error(app.Listen(fmt.Sprintf("%s:%d", cfg.Server.Host, cfg.Server.Port))),
